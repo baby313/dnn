@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{f9bd3899-d1b6-4b48-8a79-91983c9b6fa5}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>net\lenet.py</StartupFile>
+    <SearchPath>layer\;net\</SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId />
+    <InterpreterVersion />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+    <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="layer\conv.py" />
+    <Compile Include="layer\fc.py" />
+    <Compile Include="layer\layer.py" />
+    <Compile Include="layer\mnist_data.py" />
+    <Compile Include="layer\pool.py" />
+    <Compile Include="layer\relu.py" />
+    <Compile Include="layer\sigmoid.py" />
+    <Compile Include="layer\tanh.py" />
+    <Compile Include="layer\__init__.py" />
+    <Compile Include="net\lenet.py" />
+    <Compile Include="net\__init__.py" />
+    <Compile Include="train.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="layer" />
+    <Folder Include="net" />
+  </ItemGroup>
+  <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="!Exists($(PtvsTargetsFile))" />
+</Project>

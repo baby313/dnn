@@ -12,7 +12,7 @@ class Mnist():
 		buf = f.read()
 		magic, n, w, h = struct.unpack_from('>IIII', buf, 0)
 		if magic != 2051:
-			raise IOError, 'not a correct mnist image file'
+			raise IOError('not a correct mnist image file')
 		images = numpy.frombuffer(buf, dtype=numpy.uint8, offset=16)
 		f.close()
 		return n, w, h, images
@@ -21,7 +21,7 @@ class Mnist():
 		buf = f.read()
 		magic, n = struct.unpack_from('>II', buf, 0)
 		if magic != 2049:
-			raise IOError, 'not a correct mnist image file'
+			raise IOError('not a correct mnist image file')
 		labels = numpy.frombuffer(buf, dtype=numpy.uint8, offset=8)
 		f.close()
 		return n, labels

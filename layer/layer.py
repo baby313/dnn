@@ -5,4 +5,4 @@ class Layer():
 		input = np.matrix()
 		input = np.matrix()
 	def forward(self):
-	
+	    return None
