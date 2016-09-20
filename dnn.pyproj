@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{f9bd3899-d1b6-4b48-8a79-91983c9b6fa5}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>net\lenet.py</StartupFile>
+    <StartupFile>test\test_layer.py</StartupFile>
     <SearchPath>layer\;net\</SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -21,6 +21,9 @@
     <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="layer\algorithm.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="layer\conv.py" />
     <Compile Include="layer\fc.py" />
     <Compile Include="layer\layer.py" />
@@ -32,11 +35,15 @@
     <Compile Include="layer\__init__.py" />
     <Compile Include="net\lenet.py" />
     <Compile Include="net\__init__.py" />
+    <Compile Include="test\test_layer.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="train.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="layer" />
     <Folder Include="net" />
+    <Folder Include="test\" />
   </ItemGroup>
   <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="!Exists($(PtvsTargetsFile))" />

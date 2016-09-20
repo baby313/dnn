@@ -1,5 +1,4 @@
 import sys
-sys.path.append("..")
 from mnist_data import Mnist
 from conv import Conv
 from pool import Pool
