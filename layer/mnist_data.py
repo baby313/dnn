@@ -1,11 +1,11 @@
 import numpy
 import struct
+from common import config
 
 class Mnist():
-	def __init__(self, img_filename, lbl_filename, batch):
+	def __init__(self, img_filename, lbl_filename):
 		self.img_count, self.w, self.h, self.images = self.read_images(img_filename)
 		self.lbl_count, self.labels = self.read_labels(lbl_filename)
-		self.batch = batch
 		self.images.shape = self.img_count, self.w * self.h
 	def read_images(self, filename):
 		f = open(filename, 'rb')
@@ -25,9 +25,14 @@ class Mnist():
 		labels = numpy.frombuffer(buf, dtype=numpy.uint8, offset=8)
 		f.close()
 		return n, labels
-	def get_input(self):
-		choice = numpy.random.choice(self.img_count, self.batch)
-		return self.images[choice]
-	def get_output(self):
-		choice = numpy.random.choice(self.img_count, self.batch)
-		return self.images[choice]
+	def forward(self):
+		choice = numpy.random.choice(self.img_count, config.batch)
+		self.output = self.images[choice]
+	def backward(self):
+		pass
+	def update(self):
+		pass
+	def get_truth(self, choice):
+		return self.labels[choice]
+	def output_size(self):
+		return self.w, self.h, 1

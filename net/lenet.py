@@ -2,29 +2,24 @@ import sys
 from mnist_data import Mnist
 from conv import Conv
 from pool import Pool
+from fc import Fc
+from network import Network
 
-batch = 2
-learn_rate = 0.02
-itration_count = 50000
+data = Mnist('data/mnist/train-images.idx3-ubyte', 'data/mnist/train-labels.idx1-ubyte')
+conv0 = Conv(6, 5)
+pool0 = Pool(2)
+conv1 = Conv(6, 5)
+pool1 = Pool(2)
+fc0 = Fc(1024)
+fc1 = Fc(1024)
 
-train_data = Mnist('data/mnist/train-images.idx3-ubyte', 'data/mnist/train-labels.idx1-ubyte', batch)
-net = [Conv(6, 5, 28, 28, 3), Pool(2)]
+net = Network()
+net.add(data)
+net.add(conv0, data)
+#net.add(pool0, conv0)
+#net.add(conv1, pool0)
+#net.add(pool1, conv1)
+#net.add(fc0, pool1)
+#net.add(fc1, 0)
 
-def train():
-	for itr in range(itration_count):
-		for b in range(batch):
-			forward()
-			backward()
-		update()
-def forward():
-	data = train_data.get_input()
-	for layer in net:
-		data = layer.forward(data)
-def backward():
-	data = train_data.get_output()
-	for layer in net[::-1]:
-		data = layer.backward(data)
-def update():
-	return None
-	
-train()
+net.train()
