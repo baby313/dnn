@@ -6,7 +6,7 @@ class Fc():
 	def __init__(self, outputs):
 		self.bias = np.random.rand(outputs)
 		self.bias_update = np.zeros(outputs)
-		self.delta = np.zeros((config.batch, outputs))
+		self.delta = None
 		self.outputs = outputs
 	def forward(self):
 		self.output = algorithm.sigmoid(np.dot(self.prev.output, self.weight) + self.bias)
