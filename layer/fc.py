@@ -9,7 +9,7 @@ class Fc():
 		self.delta = None
 		self.outputs = outputs
 	def forward(self):
-		self.output = algorithm.sigmoid(np.dot(self.prev.output, self.weight) + self.bias)
+		self.output = algorithm.sigmoid(np.dot(self.prev.output.reshape(config.batch, -1), self.weight) + self.bias)
 		return self.output
 	def backward(self):
 		self.delta *= algorithm.sigmoid_gradient(self.output)
@@ -22,6 +22,6 @@ class Fc():
 		self.bias_update *= algorithm.momentum
 		self.weight_update *= algorithm.momentum
 	def connected(self, prev):
-		self.weight = np.random.rand(self.outputs, prev.outputs)
-		self.weight_update = np.zeros((self.outputs, prev.outputs))
+		self.weight = np.random.rand(prev.outputs, self.outputs)
+		self.weight_update = np.zeros((prev.outputs, self.outputs))
 		self.prev = prev

@@ -37,7 +37,7 @@ class Conv():
 		h = self.h + 2 * self.padding
 		out_w = np.arange(0, w - self.size + 1, self.step).shape[0]
 		out_h = np.arange(0, h - self.size + 1, self.step).shape[0]
-		return out_w, out_h, self.size
+		return out_w, out_h, self.n
 	def connected(self, prev):
 		self.prev = prev
 		self.w, self.h, self.c = prev.output_size()
