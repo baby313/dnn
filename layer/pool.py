@@ -8,7 +8,7 @@ class MaxPool():
 		self.delta = None
 	def forward(self):
 		input = self.prev.output.reshape(config.batch, self.c, self.h, self.w)
-		self.output = np.zeros((config.batch, self.c, self.h / self.step, self.w / self.step))
+		self.output = np.zeros((config.batch, self.c, self.h // self.step, self.w // self.step))
 		out_w, out_h, c = self.output_size()
 		for b in range(config.batch):
 			for c in range(self.c):

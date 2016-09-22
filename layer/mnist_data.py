@@ -26,13 +26,13 @@ class Mnist():
 		f.close()
 		return n, labels
 	def forward(self):
-		choice = numpy.random.choice(self.img_count, config.batch)
-		self.output = self.images[choice]
+		self.choice = numpy.random.choice(self.img_count, config.batch)
+		self.output = self.images[self.choice]
 	def backward(self):
-		pass
+		self.prev.truth = self.labels[self.choice]
 	def update(self):
 		pass
-	def get_truth(self, choice):
-		return self.labels[choice]
 	def output_size(self):
 		return self.w, self.h, 1
+	def connected(self, prev):
+		self.prev = prev

@@ -8,10 +8,10 @@ class Network():
 		if prev != None:
 			layer.connected(prev)
 	def forward(self):
-		for l in self.layers:
+		for l in self.layers[:-1]:
 			l.forward()
 	def backward(self):
-		for l in self.layers[::-1]:
+		for l in self.layers[:0:-1]:
 			l.backward()
 	def update(self):
 		for l in self.layers:

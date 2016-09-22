@@ -33,6 +33,9 @@
     <Compile Include="layer\pool.py" />
     <Compile Include="layer\relu.py" />
     <Compile Include="layer\sigmoid.py" />
+    <Compile Include="layer\softmax.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="layer\tanh.py" />
     <Compile Include="layer\__init__.py" />
     <Compile Include="net\lenet.py" />
