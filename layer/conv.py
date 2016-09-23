@@ -12,16 +12,16 @@ class Conv():
 	def forward(self):
 		input = self.prev.output.reshape(config.batch, self.c, -1)
 		out_w, out_h, out_c = self.output_size()
-		self.output = np.array([]).reshape(-1, out_w * out_h)
-		for i in input:
-			self.output = np.vstack((self.output, algorithm.sigmoid(np.dot(self.weight, self.img2col(i)) + self.bias)))
+		self.output = np.zeros((config.batch, out_c, out_w * out_h))
+		for i in range(config.batch):
+			self.output[i] = algorithm.sigmoid(np.dot(self.weight, self.img2col(input[i])) + self.bias)
 	def backward(self):
 		#self.bias *= algorithm.sigmoid_gradient(self.output)
 		intput = np.array([])
 		return intput
 	def update(self):
 		return np.array([])
-	def img2col(self, input):
+	def img2col(self, input): # from (c, h * w) to (c * size * size, out_h * out_w)
 		input.shape = self.c, self.h, self.w
 		input = np.lib.pad(input, ((0,0), (self.padding, self.padding), (self.padding, self.padding)), 'edge')
 		c, h, w = input.shape

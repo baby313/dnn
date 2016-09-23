@@ -18,8 +18,7 @@ class Network():
 			l.update()
 	def train(self):
 		for i in range(config.loop):
-			for b in range(config.batch):
-				self.forward()
-				self.backward()
+			self.forward()
+			self.backward()
 			self.update()
 			print(i)

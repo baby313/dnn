@@ -13,11 +13,11 @@ class Softmax():
 		truth_bool = np.zeros(self.prev.output.shape)
 		for i in range(config.batch):
 			truth_bool[i, self.truth[i]] = 1
-		self.prev.delta = self.prev.output - truth_bool
+		self.prev.delta = (truth_bool - self.prev.output).transpose()
 	def update(self):
 		prob_bool = np.zeros(self.prob.shape)
 		for i in range(config.batch):
-			prob_bool[self.truth[i]] = 1
+			prob_bool[i, self.truth[i]] = 1
 		diff = prob_bool - self.prob
 		for i in range(self.group):
 			self.theta_update[:, i] += (self.input * diff[:,i]).sum(axis=0).transpose()

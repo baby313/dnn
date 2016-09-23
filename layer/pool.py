@@ -19,7 +19,7 @@ class MaxPool():
 						x = input[b, c, i:i + self.size, j:j + self.size]
 						max_i, max_j = np.unravel_index(x.argmax(), x.shape)
 						self.output[b, c, h, w] = x.max()
-		self.output.shape = config.batch * self.c, -1
+		self.output.shape = config.batch, -1
 	def backward(self):
 		w, h, c = self.output_size()
 	def update(self):
