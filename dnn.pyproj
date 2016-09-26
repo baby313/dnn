@@ -21,7 +21,7 @@
     <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="layer\common.py">
+    <Compile Include="net\common.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="layer\conv.py" />

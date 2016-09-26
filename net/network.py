@@ -21,4 +21,4 @@ class Network():
 			self.forward()
 			self.backward()
 			self.update()
-			print(i)
+			#print(i)

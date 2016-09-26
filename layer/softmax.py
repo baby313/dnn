@@ -14,6 +14,10 @@ class Softmax():
 		for i in range(config.batch):
 			prob_bool[i, self.truth[i]] = 1
 		diff = prob_bool - self.prob
+		###
+		cost = -(np.log(self.prob) * prob_bool).sum() / config.batch
+		print(cost)
+		###
 		for i in range(self.group):
 			sum = np.zeros(self.theta.shape[0])
 			for b in range(config.batch):

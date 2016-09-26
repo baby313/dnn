@@ -10,6 +10,6 @@ class config():
 	momentum = 0.9
 	decay = 0.0005
 	learning_rate = 0.1
-	batch = 2
+	batch = 20
 	loop = 20000
 	learn_rate = 0.02
