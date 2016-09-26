@@ -21,9 +21,9 @@ class Conv():
 		self.bias_update += self.delta.sum(axis=0).reshape(self.n, -1)
 		self.prev.delta = np.zeros((config.batch, self.c * self.h * self.w))
 		for i in range(config.batch):
-			self.weight_update += np.dot(self.delta[i].reshape(self.n, -1), self.img2col(input[i]).transpose())
-			prev_delta = np.dot(self.weight.transpose(), self.delta[i].reshape(self.n, -1))
-			self.prev.delta[i] = self.col2img(prev_delta).reshape(1, -1)
+			self.weight_update += np.dot(self.delta[i].reshape(1, -1), self.img2col(input[i]))
+			prev_delta = np.dot(self.weight.transpose(), self.delta[i])
+			self.prev.delta[i] = col2img(prev_delta)
 	def update(self):
 		self.bias += self.bias_update * config.learn_rate / config.batch
 		self.bias_update *= config.momentum
@@ -35,23 +35,13 @@ class Conv():
 		input = np.lib.pad(input, ((0,0), (self.padding, self.padding), (self.padding, self.padding)), 'edge')
 		c, h, w = input.shape
 		out_w, out_h, out_c = self.output_size()
-		m = np.zeros((self.size * self.size * self.c, out_w * out_h))
-		i = 0
+		m = np.array([]).reshape(self.size * self.size * self.c, -1)
 		for y in range(0, h - self.size + 1, self.step):
 			for x in range(0, w - self.size + 1, self.step):
-				a = input[:, y:y + self.size, x:x + self.size].flatten()
-				m[:, i] = a
-				i += 1
+				a = input[:, y:y + self.size, x:x + self.size].flatten().reshape(self.size * self.size * self.c, -1)
+				m = np.hstack((m, a))
 		return m
-	def col2img(self, input): # from (c * size * size, out_h * out_w) to (c, h * w)
-		m = np.zeros((self.c, self.h + self.padding * 2, self.w + self.padding * 2))
-		c, h, w = m.shape
-		i = 0
-		for y in range(0, h - self.size + 1, self.step):
-			for x in range(0, w - self.size + 1, self.step):
-				m[:, y:y + self.size, x:x + self.size] = input[:, i].reshape(c, self.size, self.size)
-				i += 1
-		return m
+	del col2img(self, input): # from 
 	def output_size(self):
 		w = self.w + 2 * self.padding
 		h = self.h + 2 * self.padding

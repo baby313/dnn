@@ -13,7 +13,7 @@ class Fc():
 		self.output = algorithm.sigmoid(np.dot(input, self.weight) + self.bias)
 		return self.output
 	def backward(self):
-		self.delta = (self.delta.transpose() * algorithm.sigmoid_gradient(self.output)).transpose()
+		self.delta = (self.delta.transpose() * algorithm.sigmoid_gradient(self.output)).transpose() # why 2 transpose?
 		self.bias_update += self.delta.sum(axis=1)
 		self.weight_update += np.dot(self.delta, self.prev.output).transpose()
 		self.prev.delta = np.dot(self.weight, self.delta)
